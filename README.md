@@ -15,5 +15,7 @@ py main.py
 
 ## References
 We can find math explanation about why this happens [here.](https://www.youtube.com/watch?v=HEfHFsfGXjs)
-The article about the relation between collisions and number PI [here.] (https://www.maths.tcd.ie/~lebed/Galperin.%20Playing%20pool%20with%20pi.pdf)
+
+The article about the relation between collisions and number PI [here.](https://www.maths.tcd.ie/~lebed/Galperin.%20Playing%20pool%20with%20pi.pdf)
+
 Code challenge that inspires me to do this python version [here.](https://www.youtube.com/watch?v=PoW8g67XNxA)
