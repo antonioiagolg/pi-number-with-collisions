@@ -12,17 +12,16 @@ class Main:
         self.screen = pygame.display.set_mode((800,600))
         self.bounce_count = 0
         self.config = config
-        self.time_steps = config.timesteps
         
 
-        self.block1 = Block(self.screen, 100, 20, 0, config.mass_block1, config.blue_color)
-        self.block2 = Block(self.screen, 200, 150, -0.00005, config.mass_block2, config.orange_color)
+        self.block1 = Block(self.screen, 100, 20, 0, self.config.mass_block1, config.blue_color)
+        self.block2 = Block(self.screen, 200, 150, -0.00005, self.config.mass_block2, config.orange_color)
         self.done = False
         
     
     def draw(self):
 
-        for i in range(self.time_steps):
+        for i in range(self.config.time_steps):
             if self.block1.hit_wall():
                 self.block1.reverse()
                 self.bounce_count = self.bounce_count + 1
@@ -39,6 +38,12 @@ class Main:
 
         self.block1.draw()
         self.block2.draw()
+    
+    def show_GUI(self):
+        pi_text = self.font.render(f"PI equals: {self.bounce_count}", False, self.config.white_color)
+        digits_text = self.font.render(f"Number of Digits: {self.config.number_of_digits}", False, self.config.white_color)
+        self.screen.blit(pi_text, (10,10))
+        self.screen.blit(digits_text, (10,40))
 
     def start(self):
         while not self.done:
@@ -48,13 +53,10 @@ class Main:
 
             self.screen.fill((0, 0, 0))
             self.draw()
-            pi_text = self.font.render(f"PI equals: {self.bounce_count}", False, (255,255,255))
-            digits_text = self.font.render(f"Number of Digits: {self.config.number_of_digits}", False, (255,255,255))
-            self.screen.blit(pi_text, (10,10))
-            self.screen.blit(digits_text, (10,40))
+            self.show_GUI()
             pygame.display.flip()
-            self.clock.tick(60)
+            self.clock.tick(self.config.framerate)
+
 
 if __name__ == '__main__':
-
     Main(Config()).start()
