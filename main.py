@@ -1,8 +1,9 @@
 import pygame
+from config import Config
 from block import Block
 
 class Main:
-    def __init__(self):
+    def __init__(self, config):
 
         pygame.init()
         pygame.font.init()
@@ -10,14 +11,12 @@ class Main:
         self.font = pygame.font.SysFont('Comic Sans MF', 30)
         self.screen = pygame.display.set_mode((800,600))
         self.bounce_count = 0
-        self.pow_mass = 6
-        self.time_steps = 30000
+        self.config = config
+        self.time_steps = config.timesteps
+        
 
-        mass_block1 = 1
-        mass_block2 = mass_block1 * pow(100, self.pow_mass)
-
-        self.block1 = Block(self.screen, 100, 20, 0, mass_block1, (0, 128, 255))
-        self.block2 = Block(self.screen, 200, 150, -0.00005, mass_block2, (255, 100, 0))
+        self.block1 = Block(self.screen, 100, 20, 0, config.mass_block1, config.blue_color)
+        self.block2 = Block(self.screen, 200, 150, -0.00005, config.mass_block2, config.orange_color)
         self.done = False
         
     
@@ -50,11 +49,12 @@ class Main:
             self.screen.fill((0, 0, 0))
             self.draw()
             pi_text = self.font.render(f"PI equals: {self.bounce_count}", False, (255,255,255))
-            digits_text = self.font.render(f"Number of Digits after dot: {self.pow_mass}", False, (255,255,255))
+            digits_text = self.font.render(f"Number of Digits: {self.config.number_of_digits}", False, (255,255,255))
             self.screen.blit(pi_text, (10,10))
             self.screen.blit(digits_text, (10,40))
             pygame.display.flip()
-            self.clock.tick(144)
+            self.clock.tick(60)
 
 if __name__ == '__main__':
-    Main().start()
+
+    Main(Config()).start()
