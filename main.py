@@ -21,7 +21,7 @@ class Main:
     
     def draw(self):
 
-        for i in range(self.config.time_steps):
+        for i in range(self.config.timesteps):
             if self.block1.hit_wall():
                 self.block1.reverse()
                 self.bounce_count = self.bounce_count + 1
